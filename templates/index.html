@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conversational AI Uho Simulation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body data-total="{{ total }}">
+
+  <main class="app">
+
+    <!-- ═══ STAGE (left) ═══ -->
+    <section class="stage">
+      <div class="stage__header">
+        <div>
+          <p class="label">UHO SIMULATION v1.0 — Flask Edition</p>
+          <h1>Conversational AI Uho Simulation</h1>
+          <p class="intro">A visual storyboard demo showing how an AI can avoid getting swept along by the conversation. Log data and calculation logic are separated on the Python side.</p>
+          <div class="phase-badge phase-1" id="phaseBadge">Phase Loading...</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+          <div class="turn-counter" id="turnCounter">Loading...</div>
+          <p class="demo-notice">※ This is a concept demo using a fixed log. Not a live measurement or diagnosis.</p>
+        </div>
+      </div>
+
+      <!-- Viewer note headline -->
+      <div class="viewer-headline" id="viewerHeadline">—</div>
+
+      <div class="conversation" id="conversation">
+        <div class="loading">Fetching log data...</div>
+      </div>
+
+      <div class="disclosure is-empty" id="disclosureBox">
+        <span>DISCLOSURE</span>
+        <p id="disclosureText">No disclosure</p>
+      </div>
+
+      <div class="controls">
+        <button type="button" id="prevBtn" disabled>Prev</button>
+        <button type="button" id="playBtn" disabled>Play</button>
+        <button type="button" id="nextBtn" disabled>Next</button>
+        <button type="button" id="resetBtn" disabled>Reset</button>
+      </div>
+    </section>
+
+    <!-- ═══ PANEL (middle) ═══ -->
+    <aside class="panel">
+      <section class="card">
+        <h2>State</h2>
+        <div class="state-row">
+          <span id="statePill" class="pill">—</span>
+          <span id="referenceState" style="font-size:12px;color:var(--muted)">—</span>
+        </div>
+        <p class="note" id="viewerNote">—</p>
+      </section>
+
+      <section class="card">
+        <h2>Internal Meters</h2>
+        <div class="meter">
+          <div class="meter__head"><span>U_fast</span><strong id="uFastValue">—</strong></div>
+          <div class="meter__track"><div id="uFastBar" class="meter__bar meter__bar--fast"></div></div>
+        </div>
+        <div class="meter">
+          <div class="meter__head"><span>U_slow</span><strong id="uSlowValue">—</strong></div>
+          <div class="meter__track"><div id="uSlowBar" class="meter__bar meter__bar--slow"></div></div>
+        </div>
+        <div class="meter">
+          <div class="meter__head"><span>friction</span><strong id="frictionValue">—</strong></div>
+          <div class="meter__track"><div id="frictionBar" class="meter__bar meter__bar--friction"></div></div>
+        </div>
+        <div class="meter">
+          <div class="meter__head"><span>drift</span><strong id="driftValue">—</strong></div>
+          <div class="meter__track"><div id="driftBar" class="meter__bar meter__bar--drift"></div></div>
+        </div>
+      </section>
+
+      <section class="card chart-card">
+        <h2>Trend Chart (All 20 Turns)</h2>
+        <div class="chart-wrapper">
+          <canvas id="metricsChart"
+            role="img"
+            aria-label="Line chart showing U_fast, U_slow, friction, and drift over 20 turns">
+            Metrics trend chart
+          </canvas>
+        </div>
+        <div id="chartLegend"></div>
+      </section>
+
+      <section class="card">
+        <h2>Intervention</h2>
+        <p id="interventionText" class="intervention">—</p>
+      </section>
+    </aside>
+
+    <!-- ═══ TIMELINE (right) ═══ -->
+    <div class="timeline-col">
+      <div class="timeline-card">
+        <h2>Timeline</h2>
+        <div class="timeline-dots" id="timelineDots"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}?v=4"></script>
+</body>
+</html>
